@@ -9,13 +9,13 @@ class Criminalip():
         ip_list = list(set(ip_list))
         if metasploit:
             ip_list = list(map(lambda x: x.replace("\n"," "),ip_list))
-            if os.path.exists("result"):
-                with open("result/"+path,"+a",encoding="utf-8") as file:
-                    file.writelines(ip_list) # type: ignore
-                    typer.secho("Save Success", fg=typer.colors.YELLOW)
-            else: 
-                os.mkdir("result") 
-                self.save_ip(ip_list,path,metasploit)                           
+        if os.path.exists("result"):
+            with open("result/"+path,"+a",encoding="utf-8") as file:
+                file.writelines(ip_list) # type: ignore
+                typer.secho("Save Success", fg=typer.colors.YELLOW)
+        else: 
+            os.mkdir("result") 
+            self.save_ip(ip_list,path,metasploit)                           
         
     def unduplicate(self,path:str):
         if os.path.exists(path):
