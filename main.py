@@ -20,7 +20,19 @@ app = typer.Typer(add_completion=False)
 
 
 @app.command()
+<<<<<<< HEAD
 def get(api_key:Annotated[str, typer.Option("--api-key")], path: Annotated[str, typer.Option("--output")],query_file:Annotated[str, typer.Option("--query-file")] , query:Annotated[str, typer.Option("--query")], metasploit:Annotated[bool, typer.Option("-m/-M","--metasploit/--no-metasploit")] = False, offset:Annotated[int, typer.Option("--offset")] = 1):
+=======
+def get(
+    api_key: Annotated[str, typer.Option("--api-key")],
+    path: Annotated[str, typer.Option("--output")],
+    query: Annotated[str, typer.Option("--query")],
+    metasploit: Annotated[
+        bool, typer.Option("-m/-M", "--metasploit/--no-metasploit")
+    ] = False,
+    offset: Annotated[int, typer.Option("--offset")] = 1,
+):
+>>>>>>> 687f9c426bc0a2efaa01b10188d821ba2092b9d8
     typer.secho("Start Wrok...\n", fg=typer.colors.CYAN)
     if  query:
         Criminalip().get_ip(api_key, offset, query, path, metasploit)
