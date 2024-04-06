@@ -2,7 +2,7 @@ import requests as req
 import json
 import typer
 import os
-
+import TempMailClass
 
 class Criminalip:
     def save_ip(self, ip_list, path: str, metasploit: bool):
@@ -63,5 +63,6 @@ class Criminalip:
                     self.save_ip(ips, path, metasploit)
                     old_save.extend(ips)
                     ips.clear()
-                header["x-api-key"] = typer.prompt("New api-key: ")
+                    api_key = TempMailClass.main()
+                header["x-api-key"] = api_key 
         return ips

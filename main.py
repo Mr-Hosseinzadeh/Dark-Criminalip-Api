@@ -1,4 +1,4 @@
-import re
+import TempMailClass 
 from Scan import Criminalip
 import typer
 from Cracker import Crack
@@ -20,9 +20,13 @@ app = typer.Typer(add_completion=False)
 
 
 @app.command()
-def get(api_key:Annotated[str, typer.Option("--api-key")], path: Annotated[str, typer.Option("--output")],query_file:Annotated[str, typer.Option("--query-file")] , query:Annotated[str, typer.Option("--query")], metasploit:Annotated[bool, typer.Option("-m/-M","--metasploit/--no-metasploit")] = False, offset:Annotated[int, typer.Option("--offset")] = 1):
-
+def get( path: Annotated[str, typer.Option("--output")],query_file:Annotated[str, typer.Option("--query-file")] , query:Annotated[str, typer.Option("--query")], gold_api_key:Annotated[str, typer.Option("--gold-api-key")]="",metasploit:Annotated[bool, typer.Option("-m/-M","--metasploit/--no-metasploit")] = False, offset:Annotated[int, typer.Option("--offset")] = 1):
     typer.secho("Start Wrok...\n", fg=typer.colors.CYAN)
+    if gold_api_key!="":
+        api_key = gold_api_key
+    else:
+        api_key = TempMailClass.main()
+        
     if  query:
         Criminalip().get_ip(api_key, offset, query, path, metasploit)
     elif query_file:
