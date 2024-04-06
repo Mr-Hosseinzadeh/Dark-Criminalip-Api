@@ -3,9 +3,7 @@ import requests as req
 import json
 import typer
 from rich.progress import Progress
-import glob
 import concurrent.futures
-import threading
 
 
 class Crack:
@@ -35,13 +33,13 @@ class Crack:
     ):
         ip_list = self.read_file(path_ip_list)
         ip_list = list(set(ip_list))
+        cracked = []
         with Progress() as progress:
             def task():
                 old_ip = self.read_file("result/"+path_cracked)
                 passwordlist = self.read_file(path_passwordlist)
                 usernamelist = self.read_file(path_userlist)
                 error = False
-                cracked = []
                 success_login = 0
                 # typer.secho(f"\nCracked: {success_login}\n", fg=typer.colors.CYAN)
                 ips_task = progress.add_task("[green]ip list ", total=len(ip_list))
