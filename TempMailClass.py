@@ -4,15 +4,14 @@ import requests as req
 from tempmail import EMail
 from bs4 import BeautifulSoup
 
+
 class Temp_Mail:
 
     def __init__(self) -> None:
         self.get_user_agent()
         self.email = EMail()
         print(self.email.address)
-        api_key =  self.signup()
-        return api_key
-
+        
 
     url = "https://www.criminalip.io/api"
     password = "@Test12345678!"
@@ -32,8 +31,6 @@ class Temp_Mail:
             random_number = random.randrange(0, user_aganets.__len__())
             user_aganet = user_aganets[random_number].removesuffix("\n")
             self.headers["User-Agent"] = user_aganet
-
-    
 
     def signup(self):
         url_signup = self.url + "/auth/user/signup"
@@ -65,13 +62,13 @@ class Temp_Mail:
         self.headers["Cookie"] = (
             self.headers["Cookie"] + response.headers["set-cookie"].split(";")[0] + ";"
         )
-        
+
         if response.status_code == 200:
-           return self.get_token_verify()
+            return self.get_token_verify()
         raise
 
     def get_token_verify(self):
-        msg = self.email.wait_for_message(timeout=70)
+        msg = self.email.wait_for_message(timeout=100)
         html_doc = msg.html_body
         soup = BeautifulSoup(html_doc, "html.parser")
         a_tags = soup.find_all("a")
@@ -95,19 +92,18 @@ class Temp_Mail:
         raise
 
     def login(self):
-            url_login = self.url + "/auth/user/login"
-            data = {
-                "account_type": "not_social",
-                "email": f"{self.email}",
-                "pw": self.password,
-            }
-            self.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            response = req.post(url_login, headers=self.headers, data=data)
-            self.headers["Content-Type"] = "application/json"
-            if response.status_code == 200:
-               return self.get_apikey()
-            raise
-
+        url_login = self.url + "/auth/user/login"
+        data = {
+            "account_type": "not_social",
+            "email": f"{self.email}",
+            "pw": self.password,
+        }
+        self.headers["Content-Type"] = "application/x-www-form-urlencoded"
+        response = req.post(url_login, headers=self.headers, data=data)
+        self.headers["Content-Type"] = "application/json"
+        if response.status_code == 200:
+            return self.get_apikey()
+        raise
 
     def get_apikey(self):
         url_get_apikey = "https://www.criminalip.io/_next/data/GUaF3eRxYyfwS36Zg9Dej/en/mypage/information.json"
@@ -121,6 +117,9 @@ class Temp_Mail:
             return api_key
         raise
 
+
 def main():
-    api_key = Temp_Mail()
+    temp_mail = Temp_Mail()
+    api_key = temp_mail.signup()
     return api_key
+ 
