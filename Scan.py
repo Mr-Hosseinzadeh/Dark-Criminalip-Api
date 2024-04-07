@@ -25,7 +25,7 @@ class Criminalip:
         else:
             return []
 
-    def get_ip(self, api_key, offset, query, path: str, metasploit):
+    def get_ip(self, api_key,  query, path: str, metasploit,offset=1):
         old_save = self.unduplicate(path)
         ips = []
         header = {"x-api-key": api_key}

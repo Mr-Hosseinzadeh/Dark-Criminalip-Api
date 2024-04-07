@@ -3,7 +3,7 @@ from Scan import Criminalip
 import typer
 from Cracker import Crack
 from typing_extensions import Annotated
-
+import os
 # test=""
 # with open("output.txt","+r",encoding="utf-8") as file:
 #     test = file.read()
@@ -27,16 +27,24 @@ def get( path: Annotated[str, typer.Option("--output")], query:Annotated[str, ty
     else:
         api_key = TempMailClass.main()
         
-    if  query:
+    if  query!="":
         Criminalip().get_ip(api_key, offset, query, path, metasploit)
-    elif query_file:
+    elif query_file!="":
+        if not os.path.exists(query_file):
+            typer.secho("Not Found File",fg=typer.colors.RED)
+            exit()
         with open(query_file,"r+",encoding="utf-8") as file:
             querys = file.readlines()
         if not len(querys)>0:
             typer.secho("Not Found Query",fg=typer.colors.RED)
         else:
             for query in querys:
-                Criminalip().get_ip(api_key, offset, query, path, metasploit)
+                Criminalip().get_ip(api_key, query, path, metasploit,offset)
+    else:
+        typer.secho("query required",fg=typer.colors.RED)
+        exit()
+        
+        
 
 @app.command()
 def crack(
