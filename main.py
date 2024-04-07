@@ -25,9 +25,11 @@ def get( path: Annotated[str, typer.Option("--output")], query:Annotated[str, ty
     if gold_api_key!="":
         api_key = gold_api_key
     else:
+        typer.secho("Get API KEY...\n", fg=typer.colors.CYAN)
         api_key = TempMailClass.main()
         
     if  query!="":
+        typer.secho("Start Get Data...\n", fg=typer.colors.CYAN)
         Criminalip().get_ip(api_key, offset, query, path, metasploit)
     elif query_file!="":
         if not os.path.exists(query_file):
