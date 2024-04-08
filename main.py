@@ -30,7 +30,7 @@ def get( path: Annotated[str, typer.Option("--output")], query:Annotated[str, ty
         
     if  query!="":
         typer.secho("Start Get Data...\n", fg=typer.colors.CYAN)
-        Criminalip().get_ip(api_key, offset, query, path, metasploit)
+        Criminalip().get_ip(api_key, query, path, metasploit,offset)
     elif query_file!="":
         if not os.path.exists(query_file):
             typer.secho("Not Found File",fg=typer.colors.RED)
