@@ -3,7 +3,7 @@ import random
 import requests as req
 from tempmail import EMail
 from bs4 import BeautifulSoup
-
+import time
 
 class Temp_Mail:
 
@@ -46,6 +46,7 @@ class Temp_Mail:
         }
         response = req.api.post(url_signup, headers=self.headers, json=data)
         if response.status_code == 200:
+            time.sleep(0.5)
             return self.send_verfiy(response)
         raise
 
@@ -64,11 +65,15 @@ class Temp_Mail:
         )
 
         if response.status_code == 200:
+            time.sleep(0.5)
             return self.get_token_verify()
         raise
 
     def get_token_verify(self):
-        msg = self.email.wait_for_message(timeout=100)
+        try:
+            msg = self.email.wait_for_message(timeout=100)
+        except:
+            return False
         html_doc = msg.html_body
         soup = BeautifulSoup(html_doc, "html.parser")
         a_tags = soup.find_all("a")
@@ -102,6 +107,7 @@ class Temp_Mail:
         response = req.post(url_login, headers=self.headers, data=data)
         self.headers["Content-Type"] = "application/json"
         if response.status_code == 200:
+            time.sleep(0.5)
             return self.get_apikey()
         raise
 
@@ -121,5 +127,8 @@ class Temp_Mail:
 def main():
     temp_mail = Temp_Mail()
     api_key = temp_mail.signup()
-    return api_key
+    if api_key:
+        return api_key
+    else:
+        main()
  

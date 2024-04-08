@@ -41,6 +41,7 @@ def get( path: Annotated[str, typer.Option("--output")], query:Annotated[str, ty
             typer.secho("Not Found Query",fg=typer.colors.RED)
         else:
             for query in querys:
+                query = query.removesuffix("\n")
                 Criminalip().get_ip(api_key, query, path, metasploit,offset)
     else:
         typer.secho("query required",fg=typer.colors.RED)
