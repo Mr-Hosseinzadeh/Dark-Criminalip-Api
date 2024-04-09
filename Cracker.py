@@ -12,6 +12,7 @@ class Crack:
             with open(path, "r+") as file:
                 result = file.readlines()
                 result = list(map(lambda x: x.removesuffix("\n"), result))
+                result = list(set(result))
             return result
         else:
             return []
@@ -86,4 +87,4 @@ class Crack:
             self.save_cracked(cracked, path_cracked)
             typer.secho("\nend", fg=typer.colors.GREEN)
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            executor.map(task, range(10))
+            executor.map(task, ip_list)
