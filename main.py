@@ -15,7 +15,6 @@ try:
     @app.command()
     def get( path: Annotated[str, typer.Option("--output")], query:Annotated[str, typer.Option("--query")]="", query_file:Annotated[str, typer.Option("--query-file")]="" ,gold_api_key:Annotated[str, typer.Option("--gold-api-key")]="",metasploit:Annotated[bool, typer.Option("-m/-M","--metasploit/--no-metasploit")] = False, offset:Annotated[int, typer.Option("--offset")] = 1):
         typer.secho("Start Wrok...\n", fg=typer.colors.CYAN)
-        r=1/0
         if gold_api_key!="":
             api_key = gold_api_key
         else:
