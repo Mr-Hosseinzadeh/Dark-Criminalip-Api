@@ -8,14 +8,7 @@ import time
 class Temp_Mail:
 
     def __init__(self) -> None:
-        self.get_user_agent()
-        self.email = EMail()
-        
-        
-
-    url = "https://www.criminalip.io/api"
-    password = "@Test12345678!"
-    headers = {
+        self.headers = {
         "Cookie": "_locale=en;",
         "Sec-Ch-Ua": '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
         "Dnt": "1",
@@ -23,19 +16,24 @@ class Temp_Mail:
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
         "Content-Type": "application/json",
     }
-
-    
-    def reset(self):
         self.get_user_agent()
         self.email = EMail()
-        self.headers = {
-            "Cookie": "_locale=en;",
-            "Sec-Ch-Ua": '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-            "Dnt": "1",
-            "Sec-Ch-Ua-Mobile": "?0",
-            "User-Agent": self.headers.get("User-Agent"),
-            "Content-Type": "application/json",
-        }
+        print(self.email)
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self,exc_type, exc_value, traceback):
+        self.headers = {}
+
+    url = "https://www.criminalip.io/api"
+    password = "@Test12345678!"
+    
+
+    
+        
+        
+        
     
     
     def get_user_agent(self):
@@ -60,7 +58,7 @@ class Temp_Mail:
         }
         response = req.api.post(url_signup, headers=self.headers, json=data)
         if response.status_code == 200:
-            time.sleep(2)
+            
             return self.send_verfiy(response)
         
 
@@ -73,19 +71,20 @@ class Temp_Mail:
         )
         data = {}
         response = req.api.post(url_authentication, headers=self.headers, json=data)
-
+        if not response.headers["set-cookie"]:
+            pass
         self.headers["Cookie"] = (
             self.headers["Cookie"] + response.headers["set-cookie"].split(";")[0] + ";"
         )
 
         if response.status_code == 200:
-            time.sleep(2)
+            
             return self.get_token_verify()
         
 
     def get_token_verify(self):
         try:
-            msg = self.email.wait_for_message(timeout=100)
+            msg = self.email.wait_for_message(timeout=30)
         except:
             return False
         html_doc = msg.html_body
@@ -121,7 +120,7 @@ class Temp_Mail:
         response = req.post(url_login, headers=self.headers, data=data)
         self.headers["Content-Type"] = "application/json"
         if response.status_code == 200:
-            time.sleep(2)
+            time.sleep(0.5)
             return self.get_apikey()
         
 
@@ -137,11 +136,13 @@ class Temp_Mail:
 
 
 def main():
-    temp_mail = Temp_Mail()
-    api_key = temp_mail.signup()
+    api_key=None
+    with Temp_Mail() as temp_mail:
+        api_key = temp_mail.signup()
     if api_key:
-        return api_key
+        print("\napi-key ==>  "+api_key)
+        main()
+        # return api_key
     else:
-        temp_mail.reset()
         main()
  
