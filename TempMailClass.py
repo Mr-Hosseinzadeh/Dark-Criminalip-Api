@@ -48,7 +48,7 @@ class Temp_Mail:
         if response.status_code == 200:
             time.sleep(0.5)
             return self.send_verfiy(response)
-        raise
+        
 
     def send_verfiy(self, last_response):
         url_authentication = self.url + "/email/authentication"
@@ -67,7 +67,7 @@ class Temp_Mail:
         if response.status_code == 200:
             time.sleep(0.5)
             return self.get_token_verify()
-        raise
+        
 
     def get_token_verify(self):
         try:
@@ -82,7 +82,7 @@ class Temp_Mail:
         if response.status_code == 200:
             token = url_verify.split("token=")[1]
             return self.verfiy(token)
-        raise
+        
 
     def verfiy(self, token):
         url_authToken = self.url + "/auth/user/authToken"
@@ -94,7 +94,7 @@ class Temp_Mail:
         self.headers["Content-Type"] = "application/json"
         if response.status_code == 200:
             return self.login()
-        raise
+        
 
     def login(self):
         url_login = self.url + "/auth/user/login"
@@ -109,7 +109,7 @@ class Temp_Mail:
         if response.status_code == 200:
             time.sleep(0.5)
             return self.get_apikey()
-        raise
+        
 
     def get_apikey(self):
         url_get_apikey = "https://www.criminalip.io/_next/data/GUaF3eRxYyfwS36Zg9Dej/en/mypage/information.json"
@@ -121,7 +121,7 @@ class Temp_Mail:
             ]["data"]["data"]["api_key"]
 
             return api_key
-        raise
+        
 
 
 def main():
