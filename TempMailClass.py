@@ -136,7 +136,7 @@ class Temp_Mail:
 
 
 def main():
-    api_key=None
+    
     with Temp_Mail() as temp_mail:
         api_key = temp_mail.signup()
     if api_key:

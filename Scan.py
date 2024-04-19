@@ -59,10 +59,9 @@ class Criminalip:
 
             except:
                 typer.secho(f"\nend \n ofsset= {offset}", fg=typer.colors.RED)
-                if len(ips) > 0:
-                    self.save_ip(ips, path, metasploit)
-                    old_save.extend(ips)
-                    ips.clear()
-                    api_key = TempMailClass.main()
+                self.save_ip(ips, path, metasploit)
+                old_save.extend(ips)
+                ips.clear()
+                api_key = TempMailClass.main()
                 header["x-api-key"] = api_key 
         return ips
