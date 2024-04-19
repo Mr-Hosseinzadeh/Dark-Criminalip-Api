@@ -140,9 +140,7 @@ def main():
     with Temp_Mail() as temp_mail:
         api_key = temp_mail.signup()
     if api_key:
-        print("\napi-key ==>  "+api_key)
-        main()
-        # return api_key
+        return api_key
     else:
         main()
  
