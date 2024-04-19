@@ -20,7 +20,7 @@ try:
         else:
             typer.secho("Get API KEY...\n", fg=typer.colors.CYAN)
             api_key = TempMailClass.main()
-        
+            
         if  query!="":
             typer.secho("Start Get Data...\n", fg=typer.colors.CYAN)
             Criminalip().get_ip(api_key, query, path, metasploit,offset)

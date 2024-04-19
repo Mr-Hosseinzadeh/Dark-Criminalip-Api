@@ -24,6 +24,20 @@ class Temp_Mail:
         "Content-Type": "application/json",
     }
 
+    
+    def reset(self):
+        self.get_user_agent()
+        self.email = EMail()
+        self.headers = {
+            "Cookie": "_locale=en;",
+            "Sec-Ch-Ua": '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
+            "Dnt": "1",
+            "Sec-Ch-Ua-Mobile": "?0",
+            "User-Agent": self.headers.get("User-Agent"),
+            "Content-Type": "application/json",
+        }
+    
+    
     def get_user_agent(self):
         path = "user-agent.txt"
         with open(path, "r+", encoding="utf-8") as file:
@@ -46,7 +60,7 @@ class Temp_Mail:
         }
         response = req.api.post(url_signup, headers=self.headers, json=data)
         if response.status_code == 200:
-            time.sleep(0.5)
+            time.sleep(2)
             return self.send_verfiy(response)
         
 
@@ -65,7 +79,7 @@ class Temp_Mail:
         )
 
         if response.status_code == 200:
-            time.sleep(0.5)
+            time.sleep(2)
             return self.get_token_verify()
         
 
@@ -107,18 +121,16 @@ class Temp_Mail:
         response = req.post(url_login, headers=self.headers, data=data)
         self.headers["Content-Type"] = "application/json"
         if response.status_code == 200:
-            time.sleep(0.5)
+            time.sleep(2)
             return self.get_apikey()
         
 
     def get_apikey(self):
-        url_get_apikey = "https://www.criminalip.io/_next/data/GUaF3eRxYyfwS36Zg9Dej/en/mypage/information.json"
+        url_get_apikey = "https://www.criminalip.io/api/proxy/account/mypage/get-info"
         response = req.get(url_get_apikey, headers=self.headers)
         if response.status_code == 200:
             dict_result = json.loads(response.text)
-            api_key = dict_result["pageProps"]["dehydratedState"]["queries"][0][
-                "state"
-            ]["data"]["data"]["api_key"]
+            api_key = dict_result["data"]["api_key"]
 
             return api_key
         
@@ -130,5 +142,6 @@ def main():
     if api_key:
         return api_key
     else:
+        temp_mail.reset()
         main()
  

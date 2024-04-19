@@ -1,0 +1,156 @@
+Time: 2024-04-19 21:16:23
+Error Message: 'set-cookie'
+Detailed Error:
+Traceback (most recent call last):
+  File "E:\Script\criminalip_api\main.py", line 57, in <module>
+    app()
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 328, in __call__
+    raise e
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 311, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 778, in main
+    return _main(
+           ^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 216, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 683, in wrapper
+    return callback(**use_params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\main.py", line 22, in get
+    api_key = TempMailClass.main()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 133, in main
+    main()
+  File "E:\Script\criminalip_api\TempMailClass.py", line 129, in main
+    api_key = temp_mail.signup()
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 50, in signup
+    return self.send_verfiy(response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 64, in send_verfiy
+    self.headers["Cookie"] + response.headers["set-cookie"].split(";")[0] + ";"
+                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\requests\structures.py", line 52, in __getitem__
+    return self._store[key.lower()][1]
+           ~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'set-cookie'
+
+---
+Time: 2024-04-19 21:18:28
+Error Message: 'set-cookie'
+Detailed Error:
+Traceback (most recent call last):
+  File "E:\Script\criminalip_api\main.py", line 57, in <module>
+    app()
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 328, in __call__
+    raise e
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 311, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 778, in main
+    return _main(
+           ^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 216, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 683, in wrapper
+    return callback(**use_params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\main.py", line 22, in get
+    api_key = TempMailClass.main()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 133, in main
+    main()
+  File "E:\Script\criminalip_api\TempMailClass.py", line 129, in main
+    api_key = temp_mail.signup()
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 50, in signup
+    return self.send_verfiy(response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 64, in send_verfiy
+    self.headers["Cookie"] + response.headers["set-cookie"].split(";")[0] + ";"
+                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\requests\structures.py", line 52, in __getitem__
+    return self._store[key.lower()][1]
+           ~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'set-cookie'
+
+---
+Time: 2024-04-19 21:26:33
+Error Message: 'set-cookie'
+Detailed Error:
+Traceback (most recent call last):
+  File "E:\Script\criminalip_api\main.py", line 57, in <module>
+    app()
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 328, in __call__
+    raise e
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 311, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1157, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 778, in main
+    return _main(
+           ^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\core.py", line 216, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\click\core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\typer\main.py", line 683, in wrapper
+    return callback(**use_params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\main.py", line 22, in get
+    api_key = TempMailClass.main()
+              ^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 133, in main
+    main()
+  File "E:\Script\criminalip_api\TempMailClass.py", line 129, in main
+    api_key = temp_mail.signup()
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 50, in signup
+    return self.send_verfiy(response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Script\criminalip_api\TempMailClass.py", line 64, in send_verfiy
+    self.headers["Cookie"] + response.headers["set-cookie"].split(";")[0] + ";"
+                             ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "e:\Script\criminalip_api\.venv\Lib\site-packages\requests\structures.py", line 52, in __getitem__
+    return self._store[key.lower()][1]
+           ~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'set-cookie'
+
+---
