@@ -10,7 +10,7 @@ class Temp_Mail:
     def __init__(self) -> None:
         self.get_user_agent()
         self.email = EMail()
-        print(self.email.address)
+        
         
 
     url = "https://www.criminalip.io/api"
