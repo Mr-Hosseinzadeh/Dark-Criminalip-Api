@@ -7,6 +7,7 @@ import os
 import logging
 import TempMailClass
 
+
 class Criminalip:
     def __init__(self):
         self.result_path = "result"
@@ -16,8 +17,8 @@ class Criminalip:
         retries = Retry(total=50, backoff_factor=1)
 
         adapter = requests.adapters.HTTPAdapter(max_retries=retries)
-        self.session.mount('http://', adapter)
-        self.session.mount('https://', adapter)
+        self.session.mount("http://", adapter)
+        self.session.mount("https://", adapter)
 
     def save_ip(self, ip_list, path: str, metasploit: bool):
         ip_list = list(set(ip_list))
@@ -59,9 +60,12 @@ class Criminalip:
                 offset += 1
 
             except Exception as e:
-                typer.secho(f"\nEnd of data or an error occurred at offset = {offset}", fg=typer.colors.RED)
+                typer.secho(
+                    f"\nEnd of data or an error occurred at offset = {offset}",
+                    fg=typer.colors.RED,
+                )
                 typer.secho(f"Error: {e}", fg=typer.colors.RED)
-                if 'x-api-key' in str(e):
+                if pars["status"] == 403:
                     api_key = TempMailClass.main()
                     self.session.headers.update({"x-api-key": api_key})
 
