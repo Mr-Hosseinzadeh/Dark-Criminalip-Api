@@ -3,6 +3,9 @@ import json
 import typer
 import os
 import TempMailClass
+import concurrent.futures
+
+
 
 class Criminalip:
     def save_ip(self, ip_list, path: str, metasploit: bool):
@@ -26,42 +29,46 @@ class Criminalip:
             return []
 
     def get_ip(self, api_key,  query, path: str, metasploit,offset=1):
-        old_save = self.unduplicate(path)
-        ips = []
-        header = {"x-api-key": api_key}
-        while True:
-            try:
-                typer.secho(f"\nGet Data From offset= {offset}", fg=typer.colors.GREEN)
-                url = f"https://api.criminalip.io/v1/banner/search?query={query}&offset={offset}"
-                response = req.get(url, headers=header).text
-                pars = json.loads(response)
-                tmp = list(
-                    map(
-                        lambda x: "http://"
-                        + x["ip_address"]
-                        + ":"
-                        + str(x["open_port_no"])
-                        + "\n",
-                        pars["data"]["result"],
+        def run():
+            old_save = self.unduplicate(path)
+            ips = []
+            header = {"x-api-key": api_key}
+            while True:
+                try:
+                    typer.secho(f"\nGet Data From offset= {offset}", fg=typer.colors.GREEN)
+                    url = f"https://api.criminalip.io/v1/banner/search?query={query}&offset={offset}"
+                    response = req.get(url, headers=header).text
+                    pars = json.loads(response)
+                    tmp = list(
+                        map(
+                            lambda x: "http://"
+                            + x["ip_address"]
+                            + ":"
+                            + str(x["open_port_no"])
+                            + "\n",
+                            pars["data"]["result"],
+                        )
                     )
-                )
-                if len(tmp) > 0:
-                    if len(old_save) > 0:
-                        for ip in tmp:
-                            if not ip in old_save:
-                                ips.append(ip)
+                    if len(tmp) > 0:
+                        if len(old_save) > 0:
+                            for ip in tmp:
+                                if not ip in old_save:
+                                    ips.append(ip)
+                        else:
+                            ips.extend(tmp)
                     else:
-                        ips.extend(tmp)
-                else:
-                    self.save_ip(ips, path, metasploit)
-                    break
-                offset += 1
+                        self.save_ip(ips, path, metasploit)
+                        break
+                    offset += 1
 
-            except:
-                typer.secho(f"\nend \n ofsset= {offset}", fg=typer.colors.RED)
-                self.save_ip(ips, path, metasploit)
-                old_save.extend(ips)
-                ips.clear()
-                api_key = TempMailClass.main()
-                header["x-api-key"] = api_key 
-        return ips
+                except:
+                    typer.secho(f"\nend \n ofsset= {offset}", fg=typer.colors.RED)
+                    self.save_ip(ips, path, metasploit)
+                    old_save.extend(ips)
+                    ips.clear()
+                    api_key = TempMailClass.main()
+                    header["x-api-key"] = api_key 
+    
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            executor.map(run, range(offset,999999))
+
