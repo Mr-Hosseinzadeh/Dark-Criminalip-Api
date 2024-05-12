@@ -134,7 +134,7 @@ class Temp_Mail:
         dict_result = json.loads(response.text)
         if dict_result["status"] == 200:
             dict_result = json.loads(response.text)
-            api_key = dict_result["data"]["api_key"]
+            api_key = dict_result["data"]["api_key"][0]["key"]
 
             return api_key
         
