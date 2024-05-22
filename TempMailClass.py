@@ -18,7 +18,7 @@ class Temp_Mail:
         self.get_user_agent()
         self.email = EMail()
         print(self.email)
-        while "ezztt" in self.email.address or "icznn.com" in self.email.address :
+        while "ezztt" in self.email.address or "icznn.com" in self.email.address or "1secmail.com" in self.email.address:
             self.email = EMail()
     
     def __enter__(self):
@@ -66,7 +66,7 @@ class Temp_Mail:
             + ";"
         )
         
-        response = req.api.post(url_authentication, headers=self.headers)
+        response = req.post(url_authentication, headers=self.headers)
         dict_result = json.loads(response.text)
         if not response.headers["set-cookie"]:
             pass
