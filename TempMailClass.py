@@ -147,5 +147,5 @@ def main():
     if api_key:
         return api_key
     else:
-        main()
+        return main()
  
