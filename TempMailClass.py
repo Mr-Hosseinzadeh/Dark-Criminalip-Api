@@ -54,7 +54,7 @@ class Temp_Mail:
         response = req.post(url_signup, headers=self.headers, json=data)
         dict_result = json.loads(response.text)
         if dict_result["status"] == 200:
-            time.sleep(1)
+            time.sleep(2)
             return self.send_verfiy(response)
         
 
@@ -92,7 +92,7 @@ class Temp_Mail:
        
 
         if response.status_code == 200:
-            time.sleep(2)
+            time.sleep(1)
             token = url_verify.split("token=")[1]
             token = unquote(token)
             return self.verfiy(token)
@@ -108,7 +108,7 @@ class Temp_Mail:
         dict_result = json.loads(response.text)
         # self.headers["Content-Type"] = "application/json"
         if dict_result["status"] == 200:
-            time.sleep(1)
+            time.sleep(2)
             return self.login()
         
 

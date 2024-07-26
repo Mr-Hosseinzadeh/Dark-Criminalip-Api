@@ -28,8 +28,9 @@ class Criminalip:
         else:
             return []
 
-    def get_ip(self, api_key, query, path: str, metasploit, offset=1):
+    def get_ip(self, api_key, query, path: str, metasploit, offset=1,api_keys=False):
         old_save = self.unduplicate(path)
+        parse ={}
         ips = []
         header = {"x-api-key": api_key}
         while True:
@@ -65,6 +66,10 @@ class Criminalip:
                 self.save_ip(ips, path, metasploit)
                 old_save.extend(ips)
                 ips.clear()
-                if parse["status"]==403:
-                    api_key = TempMailClass.main()
-                    header.update({"x-api-key": api_key})
+                if not api_keys:
+                    if parse["status"]==403:
+                        api_key = TempMailClass.main()
+                        header.update({"x-api-key": api_key})
+                else:
+                    break
+                            
